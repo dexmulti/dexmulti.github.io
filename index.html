@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>DexMulti: Concurrent Prehensile and Nonprehensile Manipulation</title>
+  <link href="res/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="res/css/video-container.css" rel="stylesheet" />
+  <script src="res/js/fa.js"></script>
+  <style>
+    p {
+      font-size: 18px;
+    }
+
+    .header {
+      width: auto;
+      padding-top: 4rem;
+      padding-bottom: 0rem;
+    }
+
+    .header h1 {
+      font-size: 43px;
+      font-family: 'Helvetica Neue';
+      font-weight: 500;
+      color: #000000c0;
+      line-height: 1.4;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      padding: 1px;
+      text-align: center;
+    }
+
+    a:link,
+    a:visited {
+      color: #0071bc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #208799;
+    }
+
+    .section-div {
+      height: 3em;
+    }
+
+    .content-div {
+      height: 1em;
+    }
+
+    .no-gutters {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .btn {
+      margin-left: 0.2rem;
+      margin-right: 0.2rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .video-caption {
+      font-size: 15px;
+      color: #555;
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="header">
+  <center>
+    <h1>
+      Concurrent Prehensile and Nonprehensile Manipulation: <br />
+      A Practical Approach to Multi-Stage Dexterous Tasks
+    </h1>
+  </center>
+</div>
+
+<center>
+  <p style="font-size: 18px; color: #555;">Anonymous IROS 2026 Submission</p>
+</center>
+
+<div class="content-div"></div>
+<center>
+  <div class="btn-group" role="group">
+    <!-- <a href="#" target="_blank">
+      <button type="button" class="btn btn-dark">
+        <span class="icon"> <i class="fas fa-file-pdf"></i> Paper </span>
+      </button>
+    </a> -->
+
+    <!-- <a href="#" target="_blank">
+      <button type="button" class="btn btn-dark">
+        <span class="icon"> <i class="fab fa-github"></i> Code </span>
+      </button>
+    </a> -->
+  </div>
+</center>
+
+<div class="content-div"></div>
+<div class="content-div"></div>
+
+<div class="container">
+
+  <!--------------------- Main Video --------------------->
+  <center>
+    <div class="col">
+      <center>
+        <!-- Replace with your main summary video -->
+        <video playsinline autoplay loop muted src="videos/main.mp4" width="100%" preload="metadata"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+  </center>
+  <div style="margin-top: 30px;" class="content-div"></div>
+
+  <!--------------------- Abstract --------------------->
+  <center>
+    <h2>Abstract</h2>
+    <div class="content-div"></div>
+    <p style="width: 75%; text-align: justify; white-space: normal">
+      Dexterous hands enable concurrent prehensile and nonprehensile manipulation (holding one object while interacting with another), a capability essential for everyday tasks yet underexplored in robotics.
+      Learning such long-horizon, contact-rich multi-stage behaviors is challenging: demonstrations are expensive to collect, and end-to-end policies require substantial data to generalize across varied object geometries and placements.
+      We present <strong>DexMulti</strong>, a sample-efficient approach for real-world dexterous multi-task manipulation that decomposes demonstrations into object-centric skills with well-defined temporal boundaries.
+      Rather than learning monolithic policies, our method retrieves demonstrated skills based on current object geometry, aligns them to the observed object state using an uncertainty-aware estimator that tracks centroid and yaw, and executes them via a retrieve-align-execute paradigm.
+      We evaluate on three multi-stage tasks requiring concurrent manipulation (Grasp+Pull, Grasp+Open, and Grasp+Grasp) across two dexterous hands (Allegro and LEAP) in over 1,000 real-world trials.
+      Our approach achieves an average success rate of 66% on training objects with only 3&ndash;4 demonstrations per object, outperforming diffusion policy baselines by 2&ndash;3&times; while requiring 5 demonstrations compared to 20&ndash;50 for comparable performance.
+      Results demonstrate robust generalization to held-out objects and spatial variations up to &plusmn;25 cm.
+    </p>
+  </center>
+
+  <div class="section-div"></div>
+
+  <!--------------------- Task Suite --------------------->
+  <center>
+    <h2>Task Suite</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      We evaluate on three multi-stage dexterous manipulation tasks, each requiring the robot to maintain a stable grasp on one object while performing a second manipulation.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>Grasp + Pull</h5>
+        <video playsinline autoplay loop muted src="videos/tasks/grasp_pull.mp4" width="105%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Grasp an object, pull open a drawer, and place the object inside.</p>
+      </center>
+    </div>
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>Grasp + Open</h5>
+        <video playsinline autoplay loop muted src="videos/tasks/grasp_open.mp4" width="105%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Grasp an object, push open a container lid, and place the object inside.</p>
+      </center>
+    </div>
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>Grasp + Grasp</h5>
+        <video playsinline autoplay loop muted src="videos/tasks/grasp_grasp.mp4" width="105%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Sequentially grasp two objects without releasing the first.</p>
+      </center>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="section-div"></div>
+
+  <!--------------------- Why Grasp Synthesis Is Hard --------------------->
+  <center>
+    <h2>Why Is Grasp Synthesis Hard for Multi-Stage Tasks?</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      Existing grasp synthesis methods optimize for single-object stability and typically recruit all available fingers, leaving no degrees of freedom for a subsequent subtask.
+      Multi-stage tasks require the initial grasp to be spatially compatible with the second interaction&mdash;constraints that are difficult to encode in standard grasp quality metrics.
+      Below we show illustrative examples of these challenges.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/grasp_synthesis/example_1.mp4" width="102%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Synthesized grasp uses all fingers, leaving none free for the next subtask.</p>
+      </center>
+    </div>
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/grasp_synthesis/example_2.mp4" width="102%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Grasp pose is incompatible with the subsequent manipulation target.</p>
+      </center>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="section-div"></div>
+
+  <!--------------------- Successful Executions --------------------->
+  <center>
+    <h2>Successful Executions</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      Our method achieves robust performance across diverse objects and spatial configurations with only 3&ndash;4 demonstrations per object.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/success/success_1.mp4" width="102%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/success/success_2.mp4" width="102%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="section-div"></div>
+
+  <!--------------------- Failure Cases --------------------->
+  <center>
+    <h2>Failure Cases</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      We show failure cases for full transparency. Common failures include unstable grasps on difficult geometries and misalignment during the second subtask.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/failures/failure_1.mp4" width="102%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Grasp failure: unstable force balance on a banana.</p>
+      </center>
+    </div>
+    <div class="col-md-6 align-column-center">
+      <center>
+        <video playsinline autoplay loop muted src="videos/failures/failure_2.mp4" width="102%"
+          style="border-radius: 10px"></video>
+        <p class="video-caption">Alignment failure: hand does not contact the drawer handle correctly.</p>
+      </center>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="section-div"></div>
+
+  <!--------------------- Baseline Comparisons --------------------->
+  <center>
+    <h2>Baseline Comparisons</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      We compare our method against diffusion policy baselines. Our retrieve-align-execute approach produces more predictable and safer behaviors.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>DexMulti (Ours)</h5>
+        <video playsinline autoplay loop muted src="videos/baselines/ours.mp4" width="105%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>Object-centric DP3</h5>
+        <video playsinline autoplay loop muted src="videos/baselines/dp3_oc.mp4" width="105%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+    <div class="col-md-4 align-column-center">
+      <center>
+        <h5>Image-based DP</h5>
+        <video playsinline autoplay loop muted src="videos/baselines/dp_image.mp4" width="105%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px;" class="section-div"></div>
+
+  <!--------------------- Embodiment Transfer --------------------->
+  <center>
+    <h2>Embodiment Transfer</h2>
+    <p style="width: 80%; text-align: center; white-space: normal">
+      Our method generalizes across two mechanically different dexterous hands: the 16-DoF Allegro Hand and the LEAP Hand.
+    </p>
+  </center>
+  <div class="content-div"></div>
+  <div class="row align-items-center">
+    <div class="col-md-6 align-column-center">
+      <center>
+        <h5>Allegro Hand</h5>
+        <video playsinline autoplay loop muted src="videos/embodiment/allegro.mp4" width="102%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+    <div class="col-md-6 align-column-center">
+      <center>
+        <h5>LEAP Hand</h5>
+        <video playsinline autoplay loop muted src="videos/embodiment/leap.mp4" width="102%"
+          style="border-radius: 10px"></video>
+      </center>
+    </div>
+  </div>
+
+  <div class="section-div"></div>
+
+  <!--------------------- BibTeX --------------------->
+  <center>
+    <h2>BibTeX</h2>
+  </center>
+  <pre>
+    <!-- @inproceedings{dexmulti2025,
+       title = {{Concurrent Prehensile and Nonprehensile Manipulation: A Practical Approach to Multi-Stage Dexterous Tasks}},
+       author = {Anonymous},
+       booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+       year = {2026}
+     } -->
+  </pre>
+
+  <!--------------------- Acknowledgement --------------------->
+  <center>
+    <h2>Acknowledgement</h2>
+    <div class="content-div"></div>
+    <p style="width: 75%; text-align: justify; white-space: normal">
+      Website template modified from
+      <a href="https://nerfies.github.io/" target="_blank">NeRFies</a>.
+    </p>
+    <p style="width: 75%; text-align: justify; white-space: normal">
+      This website is licensed under a
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+        Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
+  </center>
+
+  <div class="section-div"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="res/js/bootstrap.min.js"></script>
+</div>
+
+</body>
+</html>
