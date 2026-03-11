@@ -1,11 +1,15 @@
-# Video Files
+# Website Video Assets
 
-Place `.mp4` videos in the following subdirectories:
+This website uses compressed web-ready `.mp4` files to keep the anonymous review page lightweight.
 
-- `tasks/` - Task demonstrations: `grasp_pull.mp4`, `grasp_open.mp4`, `grasp_grasp.mp4`
-- `grasp_synthesis/` - Grasp synthesis failure examples: `example_1.mp4`, `example_2.mp4`
-- `success/` - Successful execution videos: `success_1.mp4`, `success_2.mp4`
-- `failures/` - Failure case videos: `failure_1.mp4`, `failure_2.mp4`
-- `baselines/` - Baseline comparison videos: `ours.mp4`, `dp3_oc.mp4`, `dp_image.mp4`
-- `embodiment/` - Embodiment transfer videos: `allegro.mp4`, `leap.mp4`
-- `main.mp4` - Main summary video (in this directory)
+- `main/final_submission_under60_captioned_under10mb.mp4` - captioned 1-minute submission video
+- `tasks/grasp_pull.mp4` - Grasp + Pull task clip
+- `tasks/grasp_open.mp4` - Grasp + Open task clip
+- `tasks/grasp_grasp.mp4` - Grasp + Grasp task clip
+- `grasp_synthesis/success_case.mp4` - illustrative grasp-synthesis comparison video
+- `grasp_synthesis/faliure_case.mp4` - illustrative grasp-synthesis failure video
+- `grasp_synthesis/incompatible_grasp_poster.png` - poster for the incompatible grasp comparison clip
+- `grasp_synthesis/task_compatible_poster.png` - poster for the task-compatible comparison clip
+- `highlights/full_rollouts.mp4` - 3x3 rollout montage
+- `highlights/perturbation.mp4` - perturbation robustness clip, downsampled for web delivery
+- `highlights/embodiment_generalization.mp4` - LEAP/Allegro embodiment transfer clip
