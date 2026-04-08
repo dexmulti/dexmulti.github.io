@@ -9,8 +9,24 @@
   <link href="res/css/video-container.css" rel="stylesheet" />
 </head>
 <body>
+  <!-- Sidebar Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <a href="#top" class="sidebar-link active" data-section="top">Overview</a>
+      <a href="#abstract" class="sidebar-link" data-section="abstract">Abstract</a>
+      <a href="#video" class="sidebar-link" data-section="video">Video</a>
+      <a href="#method" class="sidebar-link" data-section="method">Method</a>
+      <a href="#tasks" class="sidebar-link" data-section="tasks">Tasks</a>
+      <a href="#results" class="sidebar-link" data-section="results">Results</a>
+      <a href="#rollouts" class="sidebar-link" data-section="rollouts">Rollouts</a>
+      <a href="#comparison" class="sidebar-link" data-section="comparison">Comparison</a>
+      <a href="#robustness" class="sidebar-link" data-section="robustness">Robustness</a>
+      <a href="#embodiment" class="sidebar-link" data-section="embodiment">Embodiment</a>
+    </div>
+  </nav>
+
   <div class="page-shell">
-    <header class="hero">
+    <header class="hero" id="top">
       <p class="hero-eyebrow">Anonymous IROS 2026 Submission</p>
       <h1 class="hero-title">
         Concurrent Prehensile and Nonprehensile Manipulation:<br />
@@ -21,24 +37,17 @@
         reusable object-centric skills, aligning them to the current scene, and executing them in a
         retrieve-align-execute pipeline for robust multi-stage behavior.
       </p>
+      <div class="hero-links">
+        <a href="#" class="hero-link-btn">Paper PDF</a>
+        <a href="#" class="hero-link-btn">arXiv</a>
+        <a href="#video" class="hero-link-btn">Video</a>
+      </div>
     </header>
 
     <main class="container page-content">
-      <section class="video-section">
-        <div class="section-heading">
-          <h2>1-Minute Submission Video</h2>
-          <p>Captioned anonymized cut prepared for the paper submission website.</p>
-        </div>
-        <video
-          class="video-frame hero-video"
-          playsinline
-          controls
-          preload="metadata"
-          src="videos/main/final_submission_under60_captioned_under10mb.mp4"
-        ></video>
-      </section>
 
-      <section class="video-section">
+      <!-- Abstract -->
+      <section class="content-section" id="abstract">
         <div class="section-heading">
           <h2>Abstract</h2>
         </div>
@@ -63,11 +72,46 @@
         </p>
       </section>
 
-      <section class="video-section">
+      <!-- Submission Video -->
+      <section class="content-section" id="video">
+        <div class="section-heading">
+          <h2>1-Minute Submission Video</h2>
+          <p>Captioned anonymized cut prepared for the paper submission website.</p>
+        </div>
+        <video
+          class="video-frame hero-video"
+          playsinline
+          controls
+          preload="metadata"
+          src="videos/main/final_submission_under60_captioned_under10mb.mp4"
+        ></video>
+      </section>
+
+      <!-- Method Overview -->
+      <section class="content-section" id="method">
+        <div class="section-heading">
+          <h2>Method Overview</h2>
+          <p>
+            DexMulti decomposes multi-stage manipulation into a <strong>retrieve-align-execute</strong>
+            pipeline. Given a new scene, the system retrieves the most similar demonstrated skill based
+            on object geometry, aligns the skill trajectory to the current object pose using an
+            uncertainty-aware estimator, and executes the aligned action sequence.
+          </p>
+        </div>
+        <img
+          src="figures/method.png"
+          alt="DexMulti method overview: retrieve-align-execute pipeline"
+          class="method-figure"
+          loading="lazy"
+        />
+      </section>
+
+      <!-- Task Suite -->
+      <section class="content-section" id="tasks">
         <div class="section-heading">
           <h2>Task Suite</h2>
           <p>
-            The paper studies three multi-stage dexterous tasks where the robot must keep one object
+            Three multi-stage dexterous tasks where the robot must keep one object
             secure while completing a second interaction.
           </p>
         </div>
@@ -76,13 +120,9 @@
             <article class="video-card">
               <h3>Grasp + Pull</h3>
               <video
-                class="video-frame"
-                playsinline
-                autoplay
-                loop
-                muted
-                preload="metadata"
-                src="videos/tasks/grasp_pull.mp4"
+                class="video-frame lazy-video"
+                playsinline autoplay loop muted preload="none"
+                data-src="videos/tasks/grasp_pull.mp4"
               ></video>
               <p class="video-caption">
                 Maintain a grasp, pull open the drawer, and place the held object inside.
@@ -93,13 +133,9 @@
             <article class="video-card">
               <h3>Grasp + Open</h3>
               <video
-                class="video-frame"
-                playsinline
-                autoplay
-                loop
-                muted
-                preload="metadata"
-                src="videos/tasks/grasp_open.mp4"
+                class="video-frame lazy-video"
+                playsinline autoplay loop muted preload="none"
+                data-src="videos/tasks/grasp_open.mp4"
               ></video>
               <p class="video-caption">
                 Hold an object, open the target container, and complete the place-in-container step.
@@ -110,13 +146,9 @@
             <article class="video-card">
               <h3>Grasp + Grasp</h3>
               <video
-                class="video-frame"
-                playsinline
-                autoplay
-                loop
-                muted
-                preload="metadata"
-                src="videos/tasks/grasp_grasp.mp4"
+                class="video-frame lazy-video"
+                playsinline autoplay loop muted preload="none"
+                data-src="videos/tasks/grasp_grasp.mp4"
               ></video>
               <p class="video-caption">
                 Sequentially acquire two objects without releasing the first grasp.
@@ -126,15 +158,147 @@
         </div>
       </section>
 
-      <section class="video-section">
+      <!-- Quantitative Results -->
+      <section class="content-section" id="results">
+        <div class="section-heading">
+          <h2>Quantitative Results</h2>
+          <p>
+            Success rates (%) on training objects (overall) and held-out test objects.
+            Click any cell to view <strong>all trial rollouts</strong> for that task/method combination.
+          </p>
+        </div>
+
+        <h3 class="table-label">Training Objects (Overall)</h3>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Grasp + Pull</th>
+                <th>Grasp + Open</th>
+                <th>Grasp + Grasp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="results-row-ours">
+                <td class="method-name">DexMulti (Ours)</td>
+                <td class="result-cell clickable" data-key="grasp_pull/retrieval">
+                  <span class="result-num">64.7</span>
+                  <span class="result-fraction">22/34</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_open/retrieval">
+                  <span class="result-num">67.6</span>
+                  <span class="result-fraction">23/34</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_grasp/retrieval">
+                  <span class="result-num">44.4</span>
+                  <span class="result-fraction">12/27</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="method-name">Object-Centric DP3</td>
+                <td class="result-cell clickable" data-key="grasp_pull/object_centric_dp3">
+                  <span class="result-num">20.6</span>
+                  <span class="result-fraction">7/34</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_open/object_centric_dp3">
+                  <span class="result-num">35.3</span>
+                  <span class="result-fraction">12/34</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_grasp/object_centric_dp3">
+                  <span class="result-num">29.6</span>
+                  <span class="result-fraction">8/27</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="table-label">Test Objects (Generalization)</h3>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Grasp + Pull</th>
+                <th>Grasp + Open</th>
+                <th>Grasp + Grasp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="results-row-ours">
+                <td class="method-name">DexMulti (Ours)</td>
+                <td class="result-cell clickable" data-key="grasp_pull/retrieval_test">
+                  <span class="result-num">77.4</span>
+                  <span class="result-fraction">24/31</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_open/retrieval_test">
+                  <span class="result-num">71.0</span>
+                  <span class="result-fraction">22/31</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_grasp/retrieval_test">
+                  <span class="result-num">20.0</span>
+                  <span class="result-fraction">3/15</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="method-name">Object-Centric DP3</td>
+                <td class="result-cell clickable" data-key="grasp_pull/object_centric_dp3_test">
+                  <span class="result-num">25.8</span>
+                  <span class="result-fraction">8/31</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_open/object_centric_dp3_test">
+                  <span class="result-num">38.7</span>
+                  <span class="result-fraction">12/31</span>
+                </td>
+                <td class="result-cell clickable" data-key="grasp_grasp/object_centric_dp3_test">
+                  <span class="result-num">46.7</span>
+                  <span class="result-fraction">7/15</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Trial Rollout Modal/Expand Area -->
+        <div class="trial-viewer" id="trialViewer" hidden>
+          <div class="trial-viewer-header">
+            <h3 id="trialViewerTitle"></h3>
+            <button class="trial-viewer-close" id="trialViewerClose" aria-label="Close">&times;</button>
+          </div>
+          <div class="trial-viewer-legend">
+            <span class="legend-item"><span class="badge-success">&#10003;</span> Success</span>
+            <span class="legend-item"><span class="badge-failure">&#10007;</span> Failure</span>
+          </div>
+          <div class="trial-grid" id="trialGrid"></div>
+        </div>
+      </section>
+
+      <!-- Representative Full Rollouts -->
+      <section class="content-section" id="rollouts">
+        <div class="section-heading">
+          <h2>Representative Full Rollouts</h2>
+          <p>
+            A compact 3x3 montage highlights complete executions across the task suite.
+          </p>
+        </div>
+        <article class="video-card">
+          <video
+            class="video-frame hero-video lazy-video"
+            playsinline controls preload="none"
+            data-src="videos/highlights/full_rollouts.mp4"
+          ></video>
+        </article>
+      </section>
+
+      <!-- Comparison with Demonstration-Free Methods -->
+      <section class="content-section" id="comparison">
         <div class="section-heading">
           <h2>Comparison with Demonstration-Free Methods</h2>
           <p>
-            A natural question is whether demonstration-free approaches, such as reinforcement
-            learning or grasp synthesis, could replace our demonstration-based pipeline. In practice,
-            these methods rely on carefully engineered reward or energy functions and well-chosen
-            initializations to elicit the desired behavior, which becomes increasingly difficult for
-            multi-stage tasks.
+            Demonstration-free approaches such as reinforcement learning or grasp synthesis
+            rely on carefully engineered reward functions and initializations, which becomes
+            increasingly difficult for multi-stage tasks.
           </p>
         </div>
         <div class="row">
@@ -142,18 +306,14 @@
             <article class="video-card">
               <h3>Failure: Stable Grasp, Poor Task Compatibility</h3>
               <video
-                class="video-frame"
-                playsinline
-                controls
-                preload="metadata"
+                class="video-frame lazy-video"
+                playsinline controls preload="none"
                 poster="videos/grasp_synthesis/incompatible_grasp_poster.png"
-                src="videos/grasp_synthesis/success_case.mp4"
+                data-src="videos/grasp_synthesis/success_case.mp4"
               ></video>
               <p class="video-caption">
                 The method finds a stable grasp on the bottle, but the grasp is not compatible with
-                the follow-up manipulation. The bottle remains secure while the second object is
-                never picked up, illustrating that grasp stability alone is not enough for a
-                multi-stage task.
+                the follow-up manipulation.
               </p>
             </article>
           </div>
@@ -161,143 +321,176 @@
             <article class="video-card">
               <h3>Success: Task-Compatible Initialization</h3>
               <video
-                class="video-frame"
-                playsinline
-                controls
-                preload="metadata"
+                class="video-frame lazy-video"
+                playsinline controls preload="none"
                 poster="videos/grasp_synthesis/task_compatible_poster.png"
-                src="videos/grasp_synthesis/faliure_case.mp4"
+                data-src="videos/grasp_synthesis/faliure_case.mp4"
               ></video>
               <p class="video-caption">
-                A different initialization yields a task-compatible grasp that keeps the bottle
-                secure while allowing the second object to be acquired. This contrast highlights how
-                strongly demonstration-free optimization depends on initialization and objective
-                design.
+                A different initialization yields a task-compatible grasp. This contrast highlights
+                how strongly demonstration-free optimization depends on initialization.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="video-section">
+      <!-- Robustness and Embodiment Transfer -->
+      <section class="content-section" id="robustness">
         <div class="section-heading">
-          <h2>Representative Full Rollouts</h2>
+          <h2>Robustness to Perturbations</h2>
           <p>
-            A compact 3x3 montage highlights complete executions across the task suite using the
-            web-sized teaser assets.
+            DexMulti remains stable under external disturbances while continuing
+            multi-stage tasks.
           </p>
         </div>
         <article class="video-card">
           <video
-            class="video-frame hero-video"
-            playsinline
-            controls
-            preload="metadata"
-            src="videos/highlights/full_rollouts.mp4"
+            class="video-frame hero-video lazy-video"
+            playsinline controls preload="none"
+            data-src="videos/highlights/perturbation.mp4"
+          ></video>
+        </article>
+      </section>
+
+      <section class="content-section" id="embodiment">
+        <div class="section-heading">
+          <h2>Embodiment Transfer</h2>
+          <p>
+            The same approach transfers across mechanically different dexterous hands
+            without retraining.
+          </p>
+        </div>
+        <article class="video-card">
+          <h3>LEAP Hand vs Allegro Hand</h3>
+          <video
+            class="video-frame hero-video lazy-video"
+            playsinline controls preload="none"
+            data-src="videos/highlights/embodiment_generalization.mp4"
           ></video>
           <p class="video-caption">
-            Full rollout montage spanning Grasp + Pull, Grasp + Open, and Grasp + Grasp.
+            Side-by-side embodiment transfer on Grasp + Pull across two dexterous hands.
           </p>
         </article>
       </section>
 
-      <section class="video-section">
-        <div class="section-heading">
-          <h2>Robustness and Embodiment Transfer</h2>
-          <p>
-            The website includes dedicated clips for perturbation robustness and transfer across two
-            different dexterous hands.
-          </p>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 mb-4">
-            <article class="video-card">
-              <h3>External Perturbations</h3>
-              <video
-                class="video-frame"
-                playsinline
-                controls
-                preload="metadata"
-                src="videos/highlights/perturbation.mp4"
-              ></video>
-              <p class="video-caption">
-                DexMulti remains stable under disturbances while continuing the multi-stage task.
-              </p>
-            </article>
-          </div>
-          <div class="col-lg-6 mb-0">
-            <article class="video-card">
-              <h3>LEAP and Allegro Hands</h3>
-              <video
-                class="video-frame"
-                playsinline
-                controls
-                preload="metadata"
-                src="videos/highlights/embodiment_generalization.mp4"
-              ></video>
-              <p class="video-caption">
-                Side-by-side embodiment transfer across mechanically different dexterous hands.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="video-section">
-        <div class="section-heading">
-          <h2>Acknowledgement</h2>
-        </div>
-        <p class="acknowledgement">
-          Website designed and implemented with OpenAI Codex.
-        </p>
-      </section>
     </main>
   </div>
 
-  <aside class="reviewer-notice" data-reviewer-notice aria-label="Reviewer note">
-    <button
-      class="reviewer-notice-close"
-      type="button"
-      aria-label="Dismiss reviewer note"
-      data-reviewer-notice-close
-    >
-      &times;
-    </button>
-    <p>
-      This website is not completed and we plan to add more videos. We uploaded a
-      <strong>VERY ROUGH</strong> draft so that early reviewers can get a reference to our method.
-      Thank you for spending your time to review our paper. We plan to complete the website by the
-      end of March 2026.
-    </p>
-  </aside>
-
   <script>
-    (function () {
-      var storageKey = "dexmulti-reviewer-note-dismissed";
-      var notice = document.querySelector("[data-reviewer-notice]");
-      var closeButton = document.querySelector("[data-reviewer-notice-close]");
+  (function () {
+    /* ── Trial data ── */
+    var TRIALS = {"grasp_pull/retrieval":[{"n":1,"p":"videos/trials/grasp_pull/retrieval/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_pull/retrieval/trial_002.mp4","s":true},{"n":3,"p":"videos/trials/grasp_pull/retrieval/trial_003.mp4","s":true},{"n":4,"p":"videos/trials/grasp_pull/retrieval/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_pull/retrieval/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_pull/retrieval/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_pull/retrieval/trial_007.mp4","s":true},{"n":8,"p":"videos/trials/grasp_pull/retrieval/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_pull/retrieval/trial_009.mp4","s":true},{"n":10,"p":"videos/trials/grasp_pull/retrieval/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_pull/retrieval/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_pull/retrieval/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_pull/retrieval/trial_013.mp4","s":true},{"n":14,"p":"videos/trials/grasp_pull/retrieval/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_pull/retrieval/trial_015.mp4","s":false},{"n":16,"p":"videos/trials/grasp_pull/retrieval/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_pull/retrieval/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_pull/retrieval/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_pull/retrieval/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_pull/retrieval/trial_020.mp4","s":true},{"n":21,"p":"videos/trials/grasp_pull/retrieval/trial_021.mp4","s":true},{"n":22,"p":"videos/trials/grasp_pull/retrieval/trial_022.mp4","s":true},{"n":23,"p":"videos/trials/grasp_pull/retrieval/trial_023.mp4","s":false},{"n":24,"p":"videos/trials/grasp_pull/retrieval/trial_024.mp4","s":false},{"n":25,"p":"videos/trials/grasp_pull/retrieval/trial_025.mp4","s":true},{"n":26,"p":"videos/trials/grasp_pull/retrieval/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_pull/retrieval/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_pull/retrieval/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_pull/retrieval/trial_029.mp4","s":true},{"n":30,"p":"videos/trials/grasp_pull/retrieval/trial_030.mp4","s":true},{"n":31,"p":"videos/trials/grasp_pull/retrieval/trial_031.mp4","s":true},{"n":32,"p":"videos/trials/grasp_pull/retrieval/trial_032.mp4","s":false},{"n":33,"p":"videos/trials/grasp_pull/retrieval/trial_033.mp4","s":true},{"n":34,"p":"videos/trials/grasp_pull/retrieval/trial_034.mp4","s":false}],"grasp_pull/object_centric_dp3":[{"n":1,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_001.mp4","s":false},{"n":2,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_005.mp4","s":true},{"n":6,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_008.mp4","s":false},{"n":9,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_010.mp4","s":false},{"n":11,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_014.mp4","s":false},{"n":15,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_015.mp4","s":false},{"n":16,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_019.mp4","s":false},{"n":20,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_020.mp4","s":false},{"n":21,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_023.mp4","s":false},{"n":24,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_024.mp4","s":false},{"n":25,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_029.mp4","s":false},{"n":30,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_030.mp4","s":true},{"n":31,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_031.mp4","s":false},{"n":32,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_032.mp4","s":false},{"n":33,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_033.mp4","s":true},{"n":34,"p":"videos/trials/grasp_pull/object_centric_dp3/trial_034.mp4","s":false}],"grasp_open/retrieval":[{"n":1,"p":"videos/trials/grasp_open/retrieval/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_open/retrieval/trial_002.mp4","s":true},{"n":3,"p":"videos/trials/grasp_open/retrieval/trial_003.mp4","s":true},{"n":4,"p":"videos/trials/grasp_open/retrieval/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_open/retrieval/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_open/retrieval/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_open/retrieval/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_open/retrieval/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_open/retrieval/trial_009.mp4","s":true},{"n":10,"p":"videos/trials/grasp_open/retrieval/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_open/retrieval/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_open/retrieval/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_open/retrieval/trial_013.mp4","s":true},{"n":14,"p":"videos/trials/grasp_open/retrieval/trial_014.mp4","s":false},{"n":15,"p":"videos/trials/grasp_open/retrieval/trial_015.mp4","s":true},{"n":16,"p":"videos/trials/grasp_open/retrieval/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_open/retrieval/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_open/retrieval/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_open/retrieval/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_open/retrieval/trial_020.mp4","s":false},{"n":21,"p":"videos/trials/grasp_open/retrieval/trial_021.mp4","s":true},{"n":22,"p":"videos/trials/grasp_open/retrieval/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_open/retrieval/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_open/retrieval/trial_024.mp4","s":false},{"n":25,"p":"videos/trials/grasp_open/retrieval/trial_025.mp4","s":true},{"n":26,"p":"videos/trials/grasp_open/retrieval/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_open/retrieval/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_open/retrieval/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_open/retrieval/trial_029.mp4","s":true},{"n":30,"p":"videos/trials/grasp_open/retrieval/trial_030.mp4","s":true},{"n":31,"p":"videos/trials/grasp_open/retrieval/trial_031.mp4","s":true},{"n":32,"p":"videos/trials/grasp_open/retrieval/trial_032.mp4","s":true},{"n":33,"p":"videos/trials/grasp_open/retrieval/trial_033.mp4","s":true},{"n":34,"p":"videos/trials/grasp_open/retrieval/trial_034.mp4","s":true}],"grasp_open/object_centric_dp3":[{"n":1,"p":"videos/trials/grasp_open/object_centric_dp3/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_open/object_centric_dp3/trial_002.mp4","s":true},{"n":3,"p":"videos/trials/grasp_open/object_centric_dp3/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_open/object_centric_dp3/trial_004.mp4","s":false},{"n":5,"p":"videos/trials/grasp_open/object_centric_dp3/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_open/object_centric_dp3/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_open/object_centric_dp3/trial_007.mp4","s":true},{"n":8,"p":"videos/trials/grasp_open/object_centric_dp3/trial_008.mp4","s":false},{"n":9,"p":"videos/trials/grasp_open/object_centric_dp3/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_open/object_centric_dp3/trial_010.mp4","s":false},{"n":11,"p":"videos/trials/grasp_open/object_centric_dp3/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_open/object_centric_dp3/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_open/object_centric_dp3/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_open/object_centric_dp3/trial_014.mp4","s":false},{"n":15,"p":"videos/trials/grasp_open/object_centric_dp3/trial_015.mp4","s":false},{"n":16,"p":"videos/trials/grasp_open/object_centric_dp3/trial_016.mp4","s":true},{"n":17,"p":"videos/trials/grasp_open/object_centric_dp3/trial_017.mp4","s":true},{"n":18,"p":"videos/trials/grasp_open/object_centric_dp3/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_open/object_centric_dp3/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_open/object_centric_dp3/trial_020.mp4","s":true},{"n":21,"p":"videos/trials/grasp_open/object_centric_dp3/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_open/object_centric_dp3/trial_022.mp4","s":true},{"n":23,"p":"videos/trials/grasp_open/object_centric_dp3/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_open/object_centric_dp3/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_open/object_centric_dp3/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_open/object_centric_dp3/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_open/object_centric_dp3/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_open/object_centric_dp3/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_open/object_centric_dp3/trial_029.mp4","s":false},{"n":30,"p":"videos/trials/grasp_open/object_centric_dp3/trial_030.mp4","s":false},{"n":31,"p":"videos/trials/grasp_open/object_centric_dp3/trial_031.mp4","s":true},{"n":32,"p":"videos/trials/grasp_open/object_centric_dp3/trial_032.mp4","s":false},{"n":33,"p":"videos/trials/grasp_open/object_centric_dp3/trial_033.mp4","s":false},{"n":34,"p":"videos/trials/grasp_open/object_centric_dp3/trial_034.mp4","s":false}],"grasp_grasp/retrieval":[{"n":1,"p":"videos/trials/grasp_grasp/retrieval/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_grasp/retrieval/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_grasp/retrieval/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_grasp/retrieval/trial_004.mp4","s":false},{"n":5,"p":"videos/trials/grasp_grasp/retrieval/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_grasp/retrieval/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_grasp/retrieval/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_grasp/retrieval/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_grasp/retrieval/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_grasp/retrieval/trial_010.mp4","s":false},{"n":11,"p":"videos/trials/grasp_grasp/retrieval/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_grasp/retrieval/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_grasp/retrieval/trial_013.mp4","s":true},{"n":14,"p":"videos/trials/grasp_grasp/retrieval/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_grasp/retrieval/trial_015.mp4","s":true},{"n":16,"p":"videos/trials/grasp_grasp/retrieval/trial_016.mp4","s":true},{"n":17,"p":"videos/trials/grasp_grasp/retrieval/trial_017.mp4","s":true},{"n":18,"p":"videos/trials/grasp_grasp/retrieval/trial_018.mp4","s":true},{"n":19,"p":"videos/trials/grasp_grasp/retrieval/trial_019.mp4","s":false},{"n":20,"p":"videos/trials/grasp_grasp/retrieval/trial_020.mp4","s":false},{"n":21,"p":"videos/trials/grasp_grasp/retrieval/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_grasp/retrieval/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_grasp/retrieval/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_grasp/retrieval/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_grasp/retrieval/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_grasp/retrieval/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_grasp/retrieval/trial_027.mp4","s":true}],"grasp_grasp/object_centric_dp3":[{"n":1,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_004.mp4","s":false},{"n":5,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_008.mp4","s":false},{"n":9,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_010.mp4","s":false},{"n":11,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_015.mp4","s":false},{"n":16,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_016.mp4","s":true},{"n":17,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_017.mp4","s":true},{"n":18,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_019.mp4","s":false},{"n":20,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_020.mp4","s":false},{"n":21,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_023.mp4","s":false},{"n":24,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_grasp/object_centric_dp3/trial_027.mp4","s":true}],"grasp_pull/retrieval_test":[{"n":1,"p":"videos/trials/grasp_pull/retrieval_test/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_pull/retrieval_test/trial_002.mp4","s":true},{"n":3,"p":"videos/trials/grasp_pull/retrieval_test/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_pull/retrieval_test/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_pull/retrieval_test/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_pull/retrieval_test/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_pull/retrieval_test/trial_007.mp4","s":true},{"n":8,"p":"videos/trials/grasp_pull/retrieval_test/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_pull/retrieval_test/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_pull/retrieval_test/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_pull/retrieval_test/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_pull/retrieval_test/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_pull/retrieval_test/trial_013.mp4","s":true},{"n":14,"p":"videos/trials/grasp_pull/retrieval_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_pull/retrieval_test/trial_015.mp4","s":true},{"n":16,"p":"videos/trials/grasp_pull/retrieval_test/trial_016.mp4","s":true},{"n":17,"p":"videos/trials/grasp_pull/retrieval_test/trial_017.mp4","s":true},{"n":18,"p":"videos/trials/grasp_pull/retrieval_test/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_pull/retrieval_test/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_pull/retrieval_test/trial_020.mp4","s":true},{"n":21,"p":"videos/trials/grasp_pull/retrieval_test/trial_021.mp4","s":true},{"n":22,"p":"videos/trials/grasp_pull/retrieval_test/trial_022.mp4","s":true},{"n":23,"p":"videos/trials/grasp_pull/retrieval_test/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_pull/retrieval_test/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_pull/retrieval_test/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_pull/retrieval_test/trial_026.mp4","s":true},{"n":27,"p":"videos/trials/grasp_pull/retrieval_test/trial_027.mp4","s":true},{"n":28,"p":"videos/trials/grasp_pull/retrieval_test/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_pull/retrieval_test/trial_029.mp4","s":true},{"n":30,"p":"videos/trials/grasp_pull/retrieval_test/trial_030.mp4","s":true},{"n":31,"p":"videos/trials/grasp_pull/retrieval_test/trial_031.mp4","s":false}],"grasp_pull/object_centric_dp3_test":[{"n":1,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_001.mp4","s":false},{"n":2,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_010.mp4","s":false},{"n":11,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_015.mp4","s":false},{"n":16,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_018.mp4","s":false},{"n":19,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_019.mp4","s":false},{"n":20,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_020.mp4","s":false},{"n":21,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_021.mp4","s":true},{"n":22,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_025.mp4","s":true},{"n":26,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_028.mp4","s":false},{"n":29,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_029.mp4","s":false},{"n":30,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_030.mp4","s":false},{"n":31,"p":"videos/trials/grasp_pull/object_centric_dp3_test/trial_031.mp4","s":false}],"grasp_open/retrieval_test":[{"n":1,"p":"videos/trials/grasp_open/retrieval_test/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_open/retrieval_test/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_open/retrieval_test/trial_003.mp4","s":true},{"n":4,"p":"videos/trials/grasp_open/retrieval_test/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_open/retrieval_test/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_open/retrieval_test/trial_006.mp4","s":true},{"n":7,"p":"videos/trials/grasp_open/retrieval_test/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_open/retrieval_test/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_open/retrieval_test/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_open/retrieval_test/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_open/retrieval_test/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_open/retrieval_test/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_open/retrieval_test/trial_013.mp4","s":true},{"n":14,"p":"videos/trials/grasp_open/retrieval_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_open/retrieval_test/trial_015.mp4","s":true},{"n":16,"p":"videos/trials/grasp_open/retrieval_test/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_open/retrieval_test/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_open/retrieval_test/trial_018.mp4","s":true},{"n":19,"p":"videos/trials/grasp_open/retrieval_test/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_open/retrieval_test/trial_020.mp4","s":true},{"n":21,"p":"videos/trials/grasp_open/retrieval_test/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_open/retrieval_test/trial_022.mp4","s":true},{"n":23,"p":"videos/trials/grasp_open/retrieval_test/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_open/retrieval_test/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_open/retrieval_test/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_open/retrieval_test/trial_026.mp4","s":true},{"n":27,"p":"videos/trials/grasp_open/retrieval_test/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_open/retrieval_test/trial_028.mp4","s":true},{"n":29,"p":"videos/trials/grasp_open/retrieval_test/trial_029.mp4","s":true},{"n":30,"p":"videos/trials/grasp_open/retrieval_test/trial_030.mp4","s":true},{"n":31,"p":"videos/trials/grasp_open/retrieval_test/trial_031.mp4","s":true}],"grasp_open/object_centric_dp3_test":[{"n":1,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_001.mp4","s":true},{"n":2,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_002.mp4","s":true},{"n":3,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_004.mp4","s":false},{"n":5,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_005.mp4","s":true},{"n":6,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_008.mp4","s":false},{"n":9,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_011.mp4","s":true},{"n":12,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_015.mp4","s":true},{"n":16,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_016.mp4","s":false},{"n":17,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_017.mp4","s":false},{"n":18,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_018.mp4","s":true},{"n":19,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_019.mp4","s":true},{"n":20,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_020.mp4","s":true},{"n":21,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_021.mp4","s":false},{"n":22,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_022.mp4","s":false},{"n":23,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_023.mp4","s":true},{"n":24,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_024.mp4","s":true},{"n":25,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_025.mp4","s":false},{"n":26,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_026.mp4","s":false},{"n":27,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_027.mp4","s":false},{"n":28,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_028.mp4","s":false},{"n":29,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_029.mp4","s":false},{"n":30,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_030.mp4","s":false},{"n":31,"p":"videos/trials/grasp_open/object_centric_dp3_test/trial_031.mp4","s":false}],"grasp_grasp/retrieval_test":[{"n":1,"p":"videos/trials/grasp_grasp/retrieval_test/trial_001.mp4","s":false},{"n":2,"p":"videos/trials/grasp_grasp/retrieval_test/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_grasp/retrieval_test/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_grasp/retrieval_test/trial_004.mp4","s":true},{"n":5,"p":"videos/trials/grasp_grasp/retrieval_test/trial_005.mp4","s":false},{"n":6,"p":"videos/trials/grasp_grasp/retrieval_test/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_grasp/retrieval_test/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_grasp/retrieval_test/trial_008.mp4","s":false},{"n":9,"p":"videos/trials/grasp_grasp/retrieval_test/trial_009.mp4","s":false},{"n":10,"p":"videos/trials/grasp_grasp/retrieval_test/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_grasp/retrieval_test/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_grasp/retrieval_test/trial_012.mp4","s":false},{"n":13,"p":"videos/trials/grasp_grasp/retrieval_test/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_grasp/retrieval_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_grasp/retrieval_test/trial_015.mp4","s":false}],"grasp_grasp/object_centric_dp3_test":[{"n":1,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_001.mp4","s":false},{"n":2,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_002.mp4","s":false},{"n":3,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_003.mp4","s":false},{"n":4,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_004.mp4","s":false},{"n":5,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_005.mp4","s":true},{"n":6,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_006.mp4","s":false},{"n":7,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_007.mp4","s":false},{"n":8,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_008.mp4","s":true},{"n":9,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_009.mp4","s":true},{"n":10,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_010.mp4","s":true},{"n":11,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_011.mp4","s":false},{"n":12,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_012.mp4","s":true},{"n":13,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_013.mp4","s":false},{"n":14,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_014.mp4","s":true},{"n":15,"p":"videos/trials/grasp_grasp/object_centric_dp3_test/trial_015.mp4","s":true}]};
 
-      if (!notice || !closeButton) {
-        return;
-      }
+    var LABELS = {
+      'grasp_pull/retrieval': 'DexMulti — Grasp + Pull (Overall)',
+      'grasp_pull/object_centric_dp3': 'Object-Centric DP3 — Grasp + Pull (Overall)',
+      'grasp_open/retrieval': 'DexMulti — Grasp + Open (Overall)',
+      'grasp_open/object_centric_dp3': 'Object-Centric DP3 — Grasp + Open (Overall)',
+      'grasp_grasp/retrieval': 'DexMulti — Grasp + Grasp (Overall)',
+      'grasp_grasp/object_centric_dp3': 'Object-Centric DP3 — Grasp + Grasp (Overall)',
+      'grasp_pull/retrieval_test': 'DexMulti — Grasp + Pull (Test Objects)',
+      'grasp_pull/object_centric_dp3_test': 'Object-Centric DP3 — Grasp + Pull (Test Objects)',
+      'grasp_open/retrieval_test': 'DexMulti — Grasp + Open (Test Objects)',
+      'grasp_open/object_centric_dp3_test': 'Object-Centric DP3 — Grasp + Open (Test Objects)',
+      'grasp_grasp/retrieval_test': 'DexMulti — Grasp + Grasp (Test Objects)',
+      'grasp_grasp/object_centric_dp3_test': 'Object-Centric DP3 — Grasp + Grasp (Test Objects)'
+    };
 
-      try {
-        if (window.localStorage.getItem(storageKey) === "1") {
-          notice.hidden = true;
-        }
-      } catch (error) {
-        /* Ignore storage failures and keep the note visible. */
-      }
+    /* ── Interactive results table ── */
+    var viewer = document.getElementById('trialViewer');
+    var grid = document.getElementById('trialGrid');
+    var viewerTitle = document.getElementById('trialViewerTitle');
+    var closeBtn = document.getElementById('trialViewerClose');
 
-      closeButton.addEventListener("click", function () {
-        notice.hidden = true;
-        try {
-          window.localStorage.setItem(storageKey, "1");
-        } catch (error) {
-          /* Ignore storage failures on dismiss. */
-        }
+    document.querySelectorAll('.result-cell.clickable').forEach(function (cell) {
+      cell.addEventListener('click', function () {
+        var key = this.getAttribute('data-key');
+        openTrialViewer(key);
       });
-    })();
+    });
+
+    closeBtn.addEventListener('click', function () {
+      viewer.hidden = true;
+      grid.innerHTML = '';
+    });
+
+    function openTrialViewer(key) {
+      var trials = TRIALS[key];
+      if (!trials) return;
+      viewerTitle.textContent = LABELS[key] || key;
+      grid.innerHTML = '';
+      var successCount = trials.filter(function(t){return t.s;}).length;
+      viewerTitle.textContent += ' (' + successCount + '/' + trials.length + ' success)';
+
+      trials.forEach(function (t) {
+        var card = document.createElement('div');
+        card.className = 'trial-card ' + (t.s ? 'trial-success' : 'trial-failure');
+        var badge = document.createElement('span');
+        badge.className = t.s ? 'trial-badge badge-success' : 'trial-badge badge-failure';
+        badge.textContent = t.s ? '\u2713' : '\u2717';
+        var label = document.createElement('span');
+        label.className = 'trial-label';
+        label.textContent = 'Trial ' + t.n;
+        var header = document.createElement('div');
+        header.className = 'trial-card-header';
+        header.appendChild(badge);
+        header.appendChild(label);
+        var video = document.createElement('video');
+        video.className = 'video-frame';
+        video.setAttribute('playsinline', '');
+        video.setAttribute('controls', '');
+        video.setAttribute('preload', 'metadata');
+        video.setAttribute('muted', '');
+        video.src = t.p;
+        card.appendChild(header);
+        card.appendChild(video);
+        grid.appendChild(card);
+      });
+
+      viewer.hidden = false;
+      viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Lazy-load videos ── */
+    var lazyVideos = document.querySelectorAll('.lazy-video');
+    if ('IntersectionObserver' in window) {
+      var videoObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var video = entry.target;
+            if (video.dataset.src) {
+              video.src = video.dataset.src;
+              video.removeAttribute('data-src');
+            }
+            videoObserver.unobserve(video);
+          }
+        });
+      }, { rootMargin: '200px' });
+      lazyVideos.forEach(function (v) { videoObserver.observe(v); });
+    } else {
+      lazyVideos.forEach(function (v) {
+        if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); }
+      });
+    }
+
+    /* ── Sidebar active state ── */
+    var sections = document.querySelectorAll('.content-section, .hero');
+    var sidebarLinks = document.querySelectorAll('.sidebar-link');
+    if ('IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            sidebarLinks.forEach(function (link) {
+              link.classList.toggle('active', link.getAttribute('data-section') === id);
+            });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      sections.forEach(function (s) { sectionObserver.observe(s); });
+    }
+  })();
   </script>
 </body>
 </html>
