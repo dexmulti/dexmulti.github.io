@@ -1,6 +1,6 @@
 # Website Video Assets
 
-This website uses compressed web-ready `.mp4` files to keep the anonymous review page lightweight.
+This website uses compressed web-ready `.mp4` files to keep the project page lightweight.
 
 - `main/final_submission_under60_captioned_under10mb.mp4` - captioned 1-minute submission video
 - `tasks/grasp_pull.mp4` - Grasp + Pull task clip

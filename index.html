@@ -5,6 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DexMulti: Concurrent Prehensile and Nonprehensile Manipulation</title>
+  <meta name="description" content="DexMulti: a sample-efficient approach to real-world multi-stage dexterous manipulation via a retrieve-align-execute pipeline. IROS 2026." />
+  <meta name="theme-color" content="#05080b" />
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DexMulti — Concurrent Prehensile and Nonprehensile Manipulation" />
+  <meta property="og:description" content="A practical approach to multi-stage dexterous tasks. IROS 2026." />
+  <meta property="og:image" content="figures/method.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <link href="res/css/bootstrap.min.css" rel="stylesheet" />
   <link href="res/css/video-container.css" rel="stylesheet" />
 </head>
@@ -13,76 +27,87 @@
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-inner">
       <a href="#top" class="sidebar-link active" data-section="top">Overview</a>
-      <a href="#abstract" class="sidebar-link" data-section="abstract">Abstract</a>
       <a href="#video" class="sidebar-link" data-section="video">Video</a>
       <a href="#method" class="sidebar-link" data-section="method">Method</a>
       <a href="#tasks" class="sidebar-link" data-section="tasks">Tasks</a>
       <a href="#results" class="sidebar-link" data-section="results">Results</a>
-      <a href="#rollouts" class="sidebar-link" data-section="rollouts">Rollouts</a>
       <a href="#comparison" class="sidebar-link" data-section="comparison">Comparison</a>
       <a href="#robustness" class="sidebar-link" data-section="robustness">Robustness</a>
       <a href="#embodiment" class="sidebar-link" data-section="embodiment">Embodiment</a>
+      <a href="#citation" class="sidebar-link" data-section="citation">Citation</a>
     </div>
   </nav>
 
   <div class="page-shell">
-    <header class="hero" id="top">
-      <p class="hero-eyebrow">Anonymous IROS 2026 Submission</p>
-      <h1 class="hero-title">
-        Concurrent Prehensile and Nonprehensile Manipulation:<br />
-        A Practical Approach to Multi-Stage Dexterous Tasks
-      </h1>
-      <p class="hero-subtitle">
-        DexMulti tackles long-horizon dexterous manipulation by decomposing demonstrations into
-        reusable object-centric skills, aligning them to the current scene, and executing them in a
-        retrieve-align-execute pipeline for robust multi-stage behavior.
-      </p>
-      <div class="hero-links">
-        <a href="#" class="hero-link-btn">Paper PDF</a>
-        <a href="#" class="hero-link-btn">arXiv</a>
-        <a href="#video" class="hero-link-btn">Video</a>
+    <!-- Full-screen hero: rollout video background with title overlay -->
+    <header class="hero-reel" id="top">
+      <video
+        class="hero-reel-video"
+        playsinline autoplay loop muted preload="auto"
+        src="videos/highlights/full_rollouts.mp4"
+      ></video>
+      <div class="hero-reel-overlay"></div>
+      <div class="hero-reel-content">
+        <h1 class="hero-title">
+          Concurrent Prehensile and Nonprehensile&nbsp;Manipulation:<br />
+          A Practical Approach to Multi-Stage Dexterous&nbsp;Tasks
+        </h1>
+        <p class="hero-eyebrow">IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2026</p>
+        <div class="hero-authors">
+          <a class="author" href="https://haojiang4400.github.io/" target="_blank" rel="noopener">Hao Jiang</a>
+          <span class="author">Yue Wu</span>
+          <a class="author" href="https://yuewang.xyz/" target="_blank" rel="noopener">Yue Wang</a>
+          <a class="author" href="https://uscresl.org/principal-investigator/" target="_blank" rel="noopener">Gaurav S. Sukhatme</a>
+          <a class="author" href="https://danielseita.github.io/" target="_blank" rel="noopener">Daniel Seita</a>
+        </div>
+        <p class="hero-affiliation">University of Southern California</p>
+        <div class="hero-links">
+          <a href="https://arxiv.org/abs/2603.11655" class="hero-link-btn" target="_blank" rel="noopener">arXiv</a>
+          <a href="#video" class="hero-link-btn">Video</a>
+          <span class="hero-link-btn hero-link-disabled">Code (Coming Soon)</span>
+        </div>
       </div>
+      <a href="#video" class="hero-reel-scroll" aria-label="Scroll to content">&#8595;</a>
     </header>
 
-    <main class="container page-content">
+    <!-- Headline results readout -->
+    <section class="stat-band" aria-label="Key results">
+      <div class="stat">
+        <span class="stat-num">66<span class="stat-unit">%</span></span>
+        <span class="stat-label">Avg. success / training objects</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2&ndash;3<span class="stat-unit">&times;</span></span>
+        <span class="stat-label">Over diffusion-policy baselines</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1,000<span class="stat-unit">+</span></span>
+        <span class="stat-label">Real-world trials</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3&ndash;4</span>
+        <span class="stat-label">Demonstrations per object</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Dexterous embodiments</span>
+      </div>
+    </section>
 
-      <!-- Abstract -->
-      <section class="content-section" id="abstract">
-        <div class="section-heading">
-          <h2>Abstract</h2>
-        </div>
-        <p class="abstract-copy">
-          Dexterous hands enable concurrent prehensile and nonprehensile manipulation, such as
-          holding one object while interacting with another, a capability essential for everyday
-          tasks yet underexplored in robotics. Learning such long-horizon, contact-rich multi-stage
-          behaviors is challenging because demonstrations are expensive to collect and end-to-end
-          policies require substantial data to generalize across varied object geometries and
-          placements. We present <strong>DexMulti</strong>, a sample-efficient approach for real-world
-          dexterous multi-task manipulation that decomposes demonstrations into object-centric skills
-          with well-defined temporal boundaries. Rather than learning monolithic policies, our method
-          retrieves demonstrated skills based on current object geometry, aligns them to the observed
-          object state using an uncertainty-aware estimator that tracks centroid and yaw, and executes
-          them via a retrieve-align-execute paradigm. We evaluate on three multi-stage tasks requiring
-          concurrent manipulation (Grasp + Pull, Grasp + Open, and Grasp + Grasp) across two
-          dexterous hands (Allegro and LEAP) in over 1,000 real-world trials. Our approach achieves
-          an average success rate of 66% on training objects with only 3-4 demonstrations per object,
-          outperforming diffusion policy baselines by 2-3x while requiring far fewer demonstrations.
-          Results demonstrate robust generalization to held-out objects and spatial variations up to
-          +/-25 cm.
-        </p>
-      </section>
+    <main class="container page-content">
 
       <!-- Submission Video -->
       <section class="content-section" id="video">
         <div class="section-heading">
-          <h2>1-Minute Submission Video</h2>
-          <p>Captioned anonymized cut prepared for the paper submission website.</p>
+          <h2>1-Minute Overview Video</h2>
+          <p>Captioned summary of the method, tasks, and real-world results.</p>
         </div>
         <video
           class="video-frame hero-video"
           playsinline
           controls
           preload="metadata"
+          poster="videos/main/submission_poster.jpg"
           src="videos/main/final_submission_under60_captioned_under10mb.mp4"
         ></video>
       </section>
@@ -274,23 +299,6 @@
         </div>
       </section>
 
-      <!-- Representative Full Rollouts -->
-      <section class="content-section" id="rollouts">
-        <div class="section-heading">
-          <h2>Representative Full Rollouts</h2>
-          <p>
-            A compact 3x3 montage highlights complete executions across the task suite.
-          </p>
-        </div>
-        <article class="video-card">
-          <video
-            class="video-frame hero-video lazy-video"
-            playsinline controls preload="none"
-            data-src="videos/highlights/full_rollouts.mp4"
-          ></video>
-        </article>
-      </section>
-
       <!-- Comparison with Demonstration-Free Methods -->
       <section class="content-section" id="comparison">
         <div class="section-heading">
@@ -348,6 +356,7 @@
           <video
             class="video-frame hero-video lazy-video"
             playsinline controls preload="none"
+            poster="videos/highlights/perturbation_poster.jpg"
             data-src="videos/highlights/perturbation.mp4"
           ></video>
         </article>
@@ -366,6 +375,7 @@
           <video
             class="video-frame hero-video lazy-video"
             playsinline controls preload="none"
+            poster="videos/highlights/embodiment_generalization_poster.jpg"
             data-src="videos/highlights/embodiment_generalization.mp4"
           ></video>
           <p class="video-caption">
@@ -374,7 +384,39 @@
         </article>
       </section>
 
+      <!-- Citation -->
+      <section class="content-section" id="citation">
+        <div class="section-heading">
+          <h2>Citation</h2>
+          <p>If you find this work useful, please consider citing it.</p>
+        </div>
+        <div class="bibtex-wrap">
+          <button class="bibtex-copy" id="bibtexCopy" type="button" aria-label="Copy BibTeX">Copy</button>
+          <pre class="bibtex"><code id="bibtex">@inproceedings{jiang2026concurrent,
+  title     = {Concurrent Prehensile and Nonprehensile Manipulation:
+               A Practical Approach to Multi-Stage Dexterous Tasks},
+  author    = {Jiang, Hao and Wu, Yue and Wang, Yue and
+               Sukhatme, Gaurav S. and Seita, Daniel},
+  booktitle = {IEEE/RSJ International Conference on Intelligent Robots
+               and Systems (IROS)},
+  year      = {2026}
+}</code></pre>
+        </div>
+      </section>
+
     </main>
+
+    <footer class="site-footer">
+      <p class="footer-title">Concurrent Prehensile and Nonprehensile Manipulation</p>
+      <p class="footer-meta">IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) 2026 &middot; University of Southern California</p>
+      <div class="footer-links">
+        <a href="https://arxiv.org/abs/2603.11655" target="_blank" rel="noopener">arXiv</a>
+        <span aria-hidden="true">/</span>
+        <a href="#video">Video</a>
+        <span aria-hidden="true">/</span>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -474,8 +516,58 @@
       });
     }
 
+    /* ── BibTeX copy ── */
+    var bibtexBtn = document.getElementById('bibtexCopy');
+    var bibtexEl = document.getElementById('bibtex');
+    if (bibtexBtn && bibtexEl && navigator.clipboard) {
+      bibtexBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(bibtexEl.textContent).then(function () {
+          bibtexBtn.classList.add('copied');
+          bibtexBtn.textContent = 'Copied';
+          setTimeout(function () {
+            bibtexBtn.classList.remove('copied');
+            bibtexBtn.textContent = 'Copy';
+          }, 1800);
+        });
+      });
+    }
+
+    /* ── Reveal nav after hero ── */
+    var heroEl = document.querySelector('.hero-reel');
+    var sidebarEl = document.getElementById('sidebar');
+    if (heroEl && sidebarEl && 'IntersectionObserver' in window) {
+      var heroObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          sidebarEl.classList.toggle('is-visible', entry.intersectionRatio < 0.55);
+        });
+      }, { threshold: [0, 0.55, 1] });
+      heroObserver.observe(heroEl);
+    } else if (sidebarEl) {
+      sidebarEl.classList.add('is-visible');
+    }
+
+    /* ── Scroll reveal ── */
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if ('IntersectionObserver' in window && !prefersReduced) {
+      var revealTargets = document.querySelectorAll('.content-section');
+      revealTargets.forEach(function (el) { el.classList.add('reveal'); });
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+      revealTargets.forEach(function (el) { revealObserver.observe(el); });
+      /* Safety net: never leave a section permanently hidden */
+      setTimeout(function () {
+        revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
+      }, 2500);
+    }
+
     /* ── Sidebar active state ── */
-    var sections = document.querySelectorAll('.content-section, .hero');
+    var sections = document.querySelectorAll('.content-section, .hero-reel');
     var sidebarLinks = document.querySelectorAll('.sidebar-link');
     if ('IntersectionObserver' in window) {
       var sectionObserver = new IntersectionObserver(function (entries) {
